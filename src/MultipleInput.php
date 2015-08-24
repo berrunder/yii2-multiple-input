@@ -30,6 +30,11 @@ class MultipleInput extends InputWidget
     const ACTION_ADD    = 'plus';
     const ACTION_REMOVE = 'remove';
 
+    /** @var string CSS classes for add button */
+    public $btnAddClass = 'btn btn-default';
+
+    /** @var string CSS classes for remove button */
+    public $btnRemoveClass = 'btn btn-danger';
     /**
      * @var ActiveRecord[]|array[] input data
      */
@@ -265,7 +270,7 @@ class MultipleInput extends InputWidget
             $type = '{multiple-btn-type}';
         } else {
             $action = $index == 0 ? self::ACTION_ADD : self::ACTION_REMOVE;
-            $type = $index == 0 ? 'btn-default' : 'btn-danger';
+            $type = $index == 0 ? $this->btnAddClass : $this->btnRemoveClass;
         }
 
         $button = Button::widget(
@@ -275,7 +280,7 @@ class MultipleInput extends InputWidget
                 'label' => Html::tag('i', null, ['class' => 'glyphicon glyphicon-' . $action]),
                 'options' => [
                     'id' => $this->getElementId('button', $index),
-                    'class' => $type . ' multiple-input-list__btn btn js-input-' . $action,
+                    'class' => $type . ' multiple-input-list__btn js-input-' . $action,
                 ]
             ]
         );
